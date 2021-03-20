@@ -21,7 +21,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_URL", '"https://devapi.harba.co/"'
+        }
         release {
+            buildConfigField "String", "API_URL", '"https://devapi.harba.co/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -64,4 +68,16 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltJetpackVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltJetpackVersion"
+
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxKotlinVersion"
+
+    // Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$retrofitAdapterVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitConverterVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitConverterVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 }

@@ -1,6 +1,8 @@
 package com.mapsplayground.view.map
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mapsplayground.remote.HarbaApi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,20 +19,29 @@ class MapViewModel @Inject constructor(
 
     private val disposable = CompositeDisposable()
 
+    private val _state = MutableLiveData(ViewState())
+    val state: LiveData<ViewState> get() = _state
+
     init {
         harbaApi.getHarbors()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    Log.e("marius", it)
+                    _state.value = _state.value!!.copy(isLoading = false)
+                    Log.e("marius", it.toString())
                 },
                 {
+                    _state.value = _state.value!!.copy(isLoading = false)
                     Log.e("marius", "error", it)
                 }
             )
             .addTo(disposable)
     }
+
+    data class ViewState(
+        val isLoading: Boolean = true
+    )
 
     override fun onCleared() {
         super.onCleared()

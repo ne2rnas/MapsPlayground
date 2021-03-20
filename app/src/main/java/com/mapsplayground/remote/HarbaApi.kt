@@ -1,5 +1,6 @@
 package com.mapsplayground.remote
 
+import com.mapsplayground.remote.model.HarborItemRemote
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -10,5 +11,5 @@ interface HarbaApi {
 
     @GET("harbors/visible")
     @Headers(CONTENT_TYPE_JSON)
-    fun getHarbors(): Single<String>
+    fun getHarbors(): Single<List<HarborItemRemote>>
 }

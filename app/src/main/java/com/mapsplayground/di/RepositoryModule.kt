@@ -1,6 +1,6 @@
 package com.mapsplayground.di
 
-import com.mapsplayground.repository.harbor.HarborRepository
+import com.mapsplayground.domain.repositories.HarborRepository
 import com.mapsplayground.repository.harbor.HarborRepositoryImpl
 import dagger.Module
 import dagger.Provides

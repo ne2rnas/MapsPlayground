@@ -2,6 +2,8 @@ package com.mapsplayground.di
 
 import com.mapsplayground.BuildConfig
 import com.mapsplayground.remote.HarbaApi
+import com.mapsplayground.remote.HarborRemoteImpl
+import com.mapsplayground.repository.harbor.HarborRemote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -39,5 +41,10 @@ object RemoteModule {
             .client(okHttpClient)
             .build()
             .create(HarbaApi::class.java)
+    }
+
+    @Provides
+    fun provideHarborRemote(harborRemoteImpl: HarborRemoteImpl): HarborRemote {
+        return harborRemoteImpl
     }
 }

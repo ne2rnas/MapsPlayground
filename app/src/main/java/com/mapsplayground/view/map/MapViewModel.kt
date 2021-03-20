@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mapsplayground.remote.HarbaApi
+import com.mapsplayground.repository.harbor.HarborRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    harbaApi: HarbaApi
+    harborRepository: HarborRepository
 ) : ViewModel() {
 
     private val disposable = CompositeDisposable()
@@ -23,7 +23,7 @@ class MapViewModel @Inject constructor(
     val state: LiveData<ViewState> get() = _state
 
     init {
-        harbaApi.getHarbors()
+        harborRepository.getHarbors()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

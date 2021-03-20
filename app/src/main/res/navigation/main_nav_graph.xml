@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/taskCompletionFragment"
-        android:name="com.mapsplayground.view.MainFragment"
+        android:name="com.mapsplayground.view.map.MapFragment"
         android:label="task_completion_fragment"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_map" />
 
 </navigation>

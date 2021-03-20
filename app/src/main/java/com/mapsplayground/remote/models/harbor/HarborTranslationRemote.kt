@@ -1,8 +1,8 @@
-package com.mapsplayground.remote.model.harbor
+package com.mapsplayground.remote.models.harbor
 
 import com.squareup.moshi.Json
 
-data class TranslationRemote(
+data class HarborTranslationRemote(
     @Json(name = "id") val id: Int,
     @Json(name = "name") val name: String,
     @Json(name = "content") val content: String,

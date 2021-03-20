@@ -1,39 +1,39 @@
 package com.mapsplayground.remote.mappers.harbor
 
 import com.mapsplayground.remote.mappers.EntityMapper
-import com.mapsplayground.remote.model.harbor.HarborItemRemote
-import com.mapsplayground.repository.harbor.model.HarborItem
-import com.mapsplayground.repository.harbor.model.Translation
+import com.mapsplayground.remote.models.harbor.HarborRemote
+import com.mapsplayground.repository.harbor.model.Harbor
+import com.mapsplayground.repository.harbor.model.HarborTranslation
 import javax.inject.Inject
 
-class HarborEntityMapper @Inject constructor() : EntityMapper<HarborItemRemote, HarborItem> {
+class HarborEntityMapper @Inject constructor() : EntityMapper<HarborRemote, Harbor> {
 
-    override fun mapFromRemote(remote: HarborItemRemote): HarborItem {
-        return HarborItem(
-            id = remote.id,
-            name = remote.name,
-            image = remote.image,
-            lat = remote.lat,
-            lon = remote.lon,
-            isPriceHidden = remote.isPriceHidden,
-            isFree = remote.isFree,
-            canBook = remote.canBook,
-            cashOnlyBookings = remote.cashOnlyBookings,
-            notActivated = remote.notActivated,
-            translationsRemote = remote.translationsRemote.map {
-                Translation(
+    override fun mapFromRemote(type: HarborRemote): Harbor {
+        return Harbor(
+            id = type.id,
+            name = type.name,
+            image = type.image,
+            lat = type.lat,
+            lon = type.lon,
+            isPriceHidden = type.isPriceHidden,
+            isFree = type.isFree,
+            canBook = type.canBook,
+            cashOnlyBookings = type.cashOnlyBookings,
+            notActivated = type.notActivated,
+            translations = type.translations.map {
+                HarborTranslation(
                     id = it.id,
                     name = it.name,
                     content = it.content,
                     locale = it.locale
                 )
             },
-            wordpressLink = remote.wordpressLink,
-            acceptBankPayments = remote.acceptBankPayments,
-            acceptEpayPayments = remote.acceptEpayPayments,
-            acceptGoCardlessPayments = remote.acceptGoCardlessPayments,
-            acceptBankPaymentsIban = remote.acceptBankPaymentsIban,
-            bookOneDayOnly = remote.bookOneDayOnly
+            wordpressLink = type.wordpressLink,
+            acceptBankPayments = type.acceptBankPayments,
+            acceptEpayPayments = type.acceptEpayPayments,
+            acceptGoCardlessPayments = type.acceptGoCardlessPayments,
+            acceptBankPaymentsIban = type.acceptBankPaymentsIban,
+            bookOneDayOnly = type.bookOneDayOnly
         )
     }
 }

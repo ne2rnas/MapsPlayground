@@ -1,6 +1,6 @@
 package com.mapsplayground.repository.harbor.model
 
-data class HarborItem(
+data class Harbor(
     val id: String,
     val name: String,
     val image: String?,
@@ -11,7 +11,7 @@ data class HarborItem(
     val canBook: Boolean,
     val cashOnlyBookings: Boolean,
     val notActivated: Boolean,
-    val translationsRemote: List<Translation>,
+    val translations: List<HarborTranslation>,
     val wordpressLink: String?,
     val acceptBankPayments: Boolean,
     val acceptEpayPayments: Boolean,

@@ -1,8 +1,8 @@
-package com.mapsplayground.remote.model.harbor
+package com.mapsplayground.remote.models.harbor
 
 import com.squareup.moshi.Json
 
-data class HarborItemRemote(
+data class HarborRemote(
     @Json(name = "id") val id: String,
     @Json(name = "name") val name: String,
     @Json(name = "image") val image: String?,
@@ -13,7 +13,7 @@ data class HarborItemRemote(
     @Json(name = "canBook") val canBook: Boolean,
     @Json(name = "cashOnlyBookings") val cashOnlyBookings: Boolean,
     @Json(name = "notActivated") val notActivated: Boolean,
-    @Json(name = "translations") val translationsRemote: List<TranslationRemote>,
+    @Json(name = "translations") val translations: List<HarborTranslationRemote>,
     @Json(name = "wordpressLink") val wordpressLink: String?,
     @Json(name = "acceptBankPayments") val acceptBankPayments: Boolean,
     @Json(name = "acceptEpayPayments") val acceptEpayPayments: Boolean,

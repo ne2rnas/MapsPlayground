@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mapsplayground.domain.interactors.GetHarborsUseCase
+import com.mapsplayground.repository.result.doIfError
+import com.mapsplayground.repository.result.doIfSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -27,9 +29,14 @@ class MapViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
+                { result ->
+                    result.doIfSuccess { harbors ->
+                        Log.e("marius", harbors.toString())
+                    }
+                    result.doIfError {
+                        Log.e("marius", "error", it)
+                    }
                     _state.value = _state.value!!.copy(isLoading = false)
-                    Log.e("marius", it.toString())
                 },
                 {
                     _state.value = _state.value!!.copy(isLoading = false)

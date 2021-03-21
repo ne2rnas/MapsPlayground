@@ -36,7 +36,7 @@ class GetHarborInfoUseCase @Inject constructor() {
                 }
             }
         } ?: WeatherIcon.Unknown
-        val description = currentWeather.weather.firstOrNull()?.description
+        val description = currentWeather.weather.firstOrNull()?.description ?: ""
         val temp = currentWeather.main.temp.toString()
         val feelsLike = currentWeather.main.feelsLike.toString()
         val humidity = currentWeather.main.humidity.toString()

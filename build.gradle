@@ -17,6 +17,7 @@ buildscript {
         kotPrefVersion = '2.13.1'
         osmVersion = '6.1.10'
         owmAndroidVersion = '2.1.0'
+        materialDialogsVersion = '3.3.0'
     }
     repositories {
         google()

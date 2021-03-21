@@ -1,6 +1,5 @@
 package com.mapsplayground.view.map
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,10 @@ import com.mapsplayground.domain.interactors.GetHarborsUseCase
 import com.mapsplayground.repository.harbor.model.Harbor
 import com.mapsplayground.repository.result.doIfError
 import com.mapsplayground.repository.result.doIfSuccess
+import com.mapsplayground.utils.Event
+import com.mapsplayground.utils.SimpleEvent
 import com.mapsplayground.view.map.usecase.CreateHarborViewsUseCase
+import com.mapsplayground.view.map.usecase.GetHarborInfoUseCase
 import com.mapsplayground.view.map.usecase.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     getHarborsUseCase: GetHarborsUseCase,
     private val createHarborViewsUseCase: CreateHarborViewsUseCase,
-    private val getWeatherUseCase: GetWeatherUseCase
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val getHarborInfoUseCase: GetHarborInfoUseCase
 ) : ViewModel() {
 
     private val disposable = CompositeDisposable()
@@ -53,7 +56,6 @@ class MapViewModel @Inject constructor(
     }
 
     fun loadWeather(marker: Marker) {
-        Log.e("mariusmarius", "marker clicked")
         getWeatherUseCase(marker.position.latitude, marker.position.longitude)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -63,7 +65,7 @@ class MapViewModel @Inject constructor(
             .subscribe(
                 { result ->
                     result.doIfSuccess { currentWeather ->
-                        onReduceState(Action.WeatherLoaded(currentWeather))
+                        onReduceState(Action.WeatherLoaded(marker.title, currentWeather))
                     }
                     result.doIfError {
                         onReduceState(Action.HarborsError(it))
@@ -85,21 +87,26 @@ class MapViewModel @Inject constructor(
             )
         }
         is Action.HarborsError -> {
-            Log.e("mariusmarius", "error", action.error)
             _state.value = _state.value!!.copy(
-                isLoading = false
+                isLoading = false,
+                showError = SimpleEvent()
             )
         }
         is Action.WeatherError -> {
-            Log.e("mariusmarius", "error", action.error)
             _state.value = _state.value!!.copy(
-                isLoading = false
+                isLoading = false,
+                showError = SimpleEvent()
             )
         }
         is Action.WeatherLoaded -> {
-            Log.e("mariusmarius", "weather loaded")
             _state.value = _state.value!!.copy(
-                isLoading = false
+                isLoading = false,
+                showHarborDialog = Event(
+                    getHarborInfoUseCase(
+                        action.harborName,
+                        action.currentWeather
+                    )
+                )
             )
         }
         Action.StartLoading -> {
@@ -110,14 +117,20 @@ class MapViewModel @Inject constructor(
     sealed class Action {
         data class HarborsLoaded(val harbors: List<Harbor>) : Action()
         data class HarborsError(val error: Throwable?) : Action()
-        data class WeatherLoaded(val currentWeather: CurrentWeather) : Action()
+        data class WeatherLoaded(
+            val harborName: String,
+            val currentWeather: CurrentWeather
+        ) : Action()
+
         data class WeatherError(val error: Throwable?) : Action()
         object StartLoading : Action()
     }
 
     data class ViewState(
         val isLoading: Boolean = true,
-        val harbors: List<HarborView> = emptyList()
+        val harbors: List<HarborView> = emptyList(),
+        val showHarborDialog: Event<HarborInfo>? = null,
+        val showError: SimpleEvent? = null
     )
 
     override fun onCleared() {

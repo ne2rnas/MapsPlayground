@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MapsPlayground</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="close">Close</string>
+    <string name="temperature">%s \u2103</string>
+    <string name="percentage">%s %%</string>
+    <string name="pressure">%s Pa</string>
+    <string name="current_weather_title">Current weather:</string>
+    <string name="temperature_title">Temperature:</string>
+    <string name="feels_like_title">Feels like:</string>
+    <string name="humidity_title">Humidity:</string>
+    <string name="pressure_title">Pressure:</string>
+    <string name="error">Mission failed. We\'ll get em next time.</string>
 </resources>

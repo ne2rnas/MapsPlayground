@@ -105,4 +105,9 @@ dependencies {
 
     // Weather
     implementation "com.github.KwabenBerko:OpenWeatherMap-Android-Library:$owmAndroidVersion"
+
+    // Material dialogs
+    implementation "com.afollestad.material-dialogs:core:$materialDialogsVersion"
+    implementation "com.afollestad.material-dialogs:lifecycle:$materialDialogsVersion"
+    implementation "com.afollestad.material-dialogs:bottomsheets:$materialDialogsVersion"
 }

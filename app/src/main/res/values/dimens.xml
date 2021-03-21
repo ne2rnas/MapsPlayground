@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="loading_progress_bar_dimension">48dp</dimen>
+    <dimen name="padding_above_weather_title">12dp</dimen>
 </resources>

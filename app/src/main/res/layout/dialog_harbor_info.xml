@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/harbor_info_description_title"
+        style="@style/WeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/current_weather_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/harbor_info_description"
+        style="@style/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_description_title"
+        tools:text="Sunny" />
+
+    <TextView
+        android:id="@+id/harbor_info_temperature_title"
+        style="@style/WeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_above_weather_title"
+        android:text="@string/temperature_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_description" />
+
+    <TextView
+        android:id="@+id/harbor_info_temperature"
+        style="@style/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_temperature_title"
+        tools:text="10 C" />
+
+    <TextView
+        android:id="@+id/harbor_info_feels_like_title"
+        style="@style/WeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_above_weather_title"
+        android:text="@string/feels_like_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_temperature" />
+
+    <TextView
+        android:id="@+id/harbor_info_feels_like"
+        style="@style/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_feels_like_title"
+        tools:text="16 C" />
+
+    <TextView
+        android:id="@+id/harbor_info_humidity_title"
+        style="@style/WeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_above_weather_title"
+        android:text="@string/humidity_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_feels_like" />
+
+    <TextView
+        android:id="@+id/harbor_info_humidity"
+        style="@style/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_humidity_title"
+        tools:text="50%" />
+
+    <TextView
+        android:id="@+id/harbor_info_pressure_title"
+        style="@style/WeatherTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_above_weather_title"
+        android:text="@string/pressure_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_humidity" />
+
+    <TextView
+        android:id="@+id/harbor_info_pressure"
+        style="@style/Weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/harbor_info_pressure_title"
+        tools:text="1000 Pa" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

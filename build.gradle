@@ -16,6 +16,7 @@ buildscript {
         roomVersion = '2.3.0-beta03'
         kotPrefVersion = '2.13.1'
         osmVersion = '6.1.10'
+        owmAndroidVersion = '2.1.0'
     }
     repositories {
         google()
@@ -36,6 +37,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 

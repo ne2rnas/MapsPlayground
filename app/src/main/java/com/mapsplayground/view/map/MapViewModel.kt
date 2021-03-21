@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mapsplayground.domain.interactors.GetHarborsUseCase
 import com.mapsplayground.repository.harbor.model.Harbor
 import com.mapsplayground.repository.result.doIfError
 import com.mapsplayground.repository.result.doIfSuccess
 import com.mapsplayground.view.map.usecase.CreateHarborViewsUseCase
+import com.mapsplayground.view.map.usecase.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -20,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MapViewModel @Inject constructor(
     getHarborsUseCase: GetHarborsUseCase,
-    private val createHarborViewsUseCase: CreateHarborViewsUseCase
+    private val createHarborViewsUseCase: CreateHarborViewsUseCase,
+    private val getWeatherUseCase: GetWeatherUseCase
 ) : ViewModel() {
 
     private val disposable = CompositeDisposable()
@@ -38,12 +41,12 @@ class MapViewModel @Inject constructor(
                         onReduceState(Action.HarborsLoaded(harbors))
                     }
                     result.doIfError {
-                        onReduceState(Action.HarborsLoadedError(it))
+                        onReduceState(Action.HarborsError(it))
                     }
 
                 },
                 {
-                    onReduceState(Action.HarborsLoadedError(it))
+                    onReduceState(Action.HarborsError(it))
                 }
             )
             .addTo(disposable)
@@ -51,6 +54,27 @@ class MapViewModel @Inject constructor(
 
     fun loadWeather(marker: Marker) {
         Log.e("mariusmarius", "marker clicked")
+        getWeatherUseCase(marker.position.latitude, marker.position.longitude)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                onReduceState(Action.StartLoading)
+            }
+            .subscribe(
+                { result ->
+                    result.doIfSuccess { currentWeather ->
+                        onReduceState(Action.WeatherLoaded(currentWeather))
+                    }
+                    result.doIfError {
+                        onReduceState(Action.HarborsError(it))
+                    }
+
+                },
+                {
+                    onReduceState(Action.HarborsError(it))
+                }
+            )
+            .addTo(disposable)
     }
 
     private fun onReduceState(action: Action) = when (action) {
@@ -60,17 +84,35 @@ class MapViewModel @Inject constructor(
                 harbors = createHarborViewsUseCase(action.harbors)
             )
         }
-        is Action.HarborsLoadedError -> {
+        is Action.HarborsError -> {
             Log.e("mariusmarius", "error", action.error)
             _state.value = _state.value!!.copy(
                 isLoading = false
             )
         }
+        is Action.WeatherError -> {
+            Log.e("mariusmarius", "error", action.error)
+            _state.value = _state.value!!.copy(
+                isLoading = false
+            )
+        }
+        is Action.WeatherLoaded -> {
+            Log.e("mariusmarius", "weather loaded")
+            _state.value = _state.value!!.copy(
+                isLoading = false
+            )
+        }
+        Action.StartLoading -> {
+            _state.value = _state.value!!.copy(isLoading = true)
+        }
     }
 
     sealed class Action {
         data class HarborsLoaded(val harbors: List<Harbor>) : Action()
-        data class HarborsLoadedError(val error: Throwable?) : Action()
+        data class HarborsError(val error: Throwable?) : Action()
+        data class WeatherLoaded(val currentWeather: CurrentWeather) : Action()
+        data class WeatherError(val error: Throwable?) : Action()
+        object StartLoading : Action()
     }
 
     data class ViewState(

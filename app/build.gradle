@@ -21,11 +21,17 @@ android {
     }
 
     buildTypes {
+        Properties properties = new Properties()
+        if (project.rootProject.file('local.properties').canRead()) {
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        }
         debug {
             buildConfigField "String", "API_URL", '"https://devapi.harba.co/"'
+            buildConfigField 'String', 'OPEN_WEATHER_MAPS_API_KEY', properties.getProperty('OPEN_WEATHER_MAPS_API_KEY', null)
         }
         release {
             buildConfigField "String", "API_URL", '"https://devapi.harba.co/"'
+            buildConfigField 'String', 'OPEN_WEATHER_MAPS_API_KEY', properties.getProperty('OPEN_WEATHER_MAPS_API_KEY', null)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -96,4 +102,7 @@ dependencies {
 
     // Osm
     implementation "org.osmdroid:osmdroid-android:$osmVersion"
+
+    // Weather
+    implementation "com.github.KwabenBerko:OpenWeatherMap-Android-Library:$owmAndroidVersion"
 }

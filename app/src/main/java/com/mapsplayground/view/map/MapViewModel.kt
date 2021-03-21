@@ -68,12 +68,12 @@ class MapViewModel @Inject constructor(
                         onReduceState(Action.WeatherLoaded(marker.title, currentWeather))
                     }
                     result.doIfError {
-                        onReduceState(Action.HarborsError(it))
+                        onReduceState(Action.WeatherError(it))
                     }
 
                 },
                 {
-                    onReduceState(Action.HarborsError(it))
+                    onReduceState(Action.WeatherError(it))
                 }
             )
             .addTo(disposable)

@@ -55,7 +55,7 @@ class HarborRepositoryImplTest {
 
             @Test
             fun `observe list from cache`() {
-                observer.assertValue(ResultOf.Success(harbors))
+                observer.assertResult(ResultOf.Success(harbors))
             }
         }
 
@@ -79,7 +79,7 @@ class HarborRepositoryImplTest {
 
             @Test
             fun `observe error from cache`() {
-                observer.assertValue(ResultOf.Error(error))
+                observer.assertResult(ResultOf.Error(error))
             }
         }
 
@@ -120,7 +120,7 @@ class HarborRepositoryImplTest {
 
             @Test
             fun `observe list from cache`() {
-                observer.assertValue(ResultOf.Success(harbors))
+                observer.assertResult(ResultOf.Success(harbors))
             }
         }
 
@@ -163,7 +163,7 @@ class HarborRepositoryImplTest {
 
             @Test
             fun `observe error from remote`() {
-                observer.assertValue(ResultOf.Error(error))
+                observer.assertResult(ResultOf.Error(error))
             }
         }
     }

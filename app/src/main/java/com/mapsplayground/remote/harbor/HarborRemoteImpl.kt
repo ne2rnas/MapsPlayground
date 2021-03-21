@@ -1,7 +1,8 @@
-package com.mapsplayground.remote
+package com.mapsplayground.remote.harbor
 
+import com.mapsplayground.remote.HarbaApi
+import com.mapsplayground.remote.HarborRemote
 import com.mapsplayground.remote.mappers.harbor.HarborEntityMapper
-import com.mapsplayground.repository.harbor.HarborRemote
 import com.mapsplayground.repository.harbor.model.Harbor
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject

@@ -2,8 +2,8 @@ package com.mapsplayground.di
 
 import com.mapsplayground.BuildConfig
 import com.mapsplayground.remote.HarbaApi
-import com.mapsplayground.remote.HarborRemoteImpl
-import com.mapsplayground.repository.harbor.HarborRemote
+import com.mapsplayground.remote.harbor.HarborRemoteImpl
+import com.mapsplayground.remote.HarborRemote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

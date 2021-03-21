@@ -1,6 +1,6 @@
 package com.mapsplayground.remote
 
-import com.mapsplayground.remote.models.harbor.HarborRemote
+import com.mapsplayground.remote.harbor.models.HarborRemote
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers

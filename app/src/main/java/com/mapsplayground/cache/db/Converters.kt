@@ -1,7 +1,7 @@
 package com.mapsplayground.cache.db
 
 import androidx.room.TypeConverter
-import com.mapsplayground.cache.models.harbor.HarborTranslationCache
+import com.mapsplayground.cache.harbor.models.HarborTranslationCache
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

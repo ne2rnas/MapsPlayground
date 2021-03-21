@@ -1,7 +1,7 @@
 package com.mapsplayground.remote.mappers.harbor
 
 import com.mapsplayground.remote.mappers.EntityMapper
-import com.mapsplayground.remote.models.harbor.HarborRemote
+import com.mapsplayground.remote.harbor.models.HarborRemote
 import com.mapsplayground.repository.harbor.model.Harbor
 import com.mapsplayground.repository.harbor.model.HarborTranslation
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.mapsplayground.cache.models.harbor
+package com.mapsplayground.cache.harbor.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package com.mapsplayground.remote.models.harbor
+package com.mapsplayground.remote.harbor.models
 
 import com.squareup.moshi.Json
 

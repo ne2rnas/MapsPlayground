@@ -2,10 +2,12 @@ package com.mapsplayground.di
 
 import android.content.Context
 import androidx.room.Room
-import com.mapsplayground.cache.HarborCacheImpl
+import com.mapsplayground.cache.harbor.HarborCacheImpl
 import com.mapsplayground.cache.db.MapsPlaygroundDatabase
 import com.mapsplayground.cache.db.Migrations
-import com.mapsplayground.repository.harbor.HarborCache
+import com.mapsplayground.cache.preferences.CachePrefs
+import com.mapsplayground.cache.preferences.CachePrefsImpl
+import com.mapsplayground.cache.HarborCache
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +28,11 @@ object CacheModule {
             .databaseBuilder(context, MapsPlaygroundDatabase::class.java, DATABASE_NAME)
             .addMigrations(*Migrations.getMigrations())
             .build()
+    }
+
+    @Provides
+    fun provideCachePrefs(cachePrefsImpl: CachePrefsImpl): CachePrefs {
+        return cachePrefsImpl
     }
 
     @Provides

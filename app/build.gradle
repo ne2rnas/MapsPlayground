@@ -90,4 +90,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.room:room-rxjava3:$roomVersion"
 
+    // Shared preferences
+    implementation "com.chibatching.kotpref:kotpref:$kotPrefVersion"
 }

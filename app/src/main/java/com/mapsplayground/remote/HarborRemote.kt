@@ -1,4 +1,4 @@
-package com.mapsplayground.repository.harbor
+package com.mapsplayground.remote
 
 import com.mapsplayground.repository.harbor.model.Harbor
 import io.reactivex.rxjava3.core.Single

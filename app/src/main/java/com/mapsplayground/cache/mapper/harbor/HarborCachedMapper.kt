@@ -1,8 +1,8 @@
 package com.mapsplayground.cache.mapper.harbor
 
 import com.mapsplayground.cache.mapper.CachedMapper
-import com.mapsplayground.cache.models.harbor.HarborCache
-import com.mapsplayground.cache.models.harbor.HarborTranslationCache
+import com.mapsplayground.cache.harbor.models.HarborCache
+import com.mapsplayground.cache.harbor.models.HarborTranslationCache
 import com.mapsplayground.repository.harbor.model.Harbor
 import com.mapsplayground.repository.harbor.model.HarborTranslation
 import javax.inject.Inject

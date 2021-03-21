@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mapsplayground.cache.dao.HarborDao
-import com.mapsplayground.cache.models.harbor.HarborCache
+import com.mapsplayground.cache.harbor.models.HarborCache
 
 @Database(
     entities = [

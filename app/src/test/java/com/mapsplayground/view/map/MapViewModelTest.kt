@@ -3,7 +3,7 @@ package com.mapsplayground.view.map
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mapsplayground.domain.interactors.GetHarborsUseCase
 import com.mapsplayground.repository.harbor.model.Harbor
-import com.mapsplayground.repository.result.ResultOf
+import com.mapsplayground.utils.result.ResultOf
 import com.mapsplayground.utils.Event
 import com.mapsplayground.utils.InstantExecutorExtension
 import com.mapsplayground.utils.RxSchedulerExtension

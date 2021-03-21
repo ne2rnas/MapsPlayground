@@ -1,4 +1,4 @@
-package com.mapsplayground.repository.result
+package com.mapsplayground.utils.result
 
 sealed class ResultOf<out R> {
     data class Success<out R>(val value: R) : ResultOf<R>()

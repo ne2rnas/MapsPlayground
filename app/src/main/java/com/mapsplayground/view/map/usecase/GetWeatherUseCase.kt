@@ -3,7 +3,7 @@ package com.mapsplayground.view.map.usecase
 import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper
 import com.kwabenaberko.openweathermaplib.implementation.callback.CurrentWeatherCallback
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
-import com.mapsplayground.repository.result.ResultOf
+import com.mapsplayground.utils.result.ResultOf
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 

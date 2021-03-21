@@ -1,4 +1,4 @@
-package com.mapsplayground.repository.result
+package com.mapsplayground.utils.result
 
 inline fun <reified T> ResultOf<T>.doIfError(callback: (throwable: Throwable?) -> Unit) {
     if (this is ResultOf.Error) {

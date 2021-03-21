@@ -4,7 +4,7 @@ import com.mapsplayground.cache.HarborCache
 import com.mapsplayground.cache.preferences.ProvideCurrentTime
 import com.mapsplayground.remote.HarborRemote
 import com.mapsplayground.repository.harbor.model.Harbor
-import com.mapsplayground.repository.result.ResultOf
+import com.mapsplayground.utils.result.ResultOf
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mapsplayground.domain.interactors.GetHarborsUseCase
 import com.mapsplayground.repository.harbor.model.Harbor
-import com.mapsplayground.repository.result.doIfError
-import com.mapsplayground.repository.result.doIfSuccess
+import com.mapsplayground.utils.result.doIfError
+import com.mapsplayground.utils.result.doIfSuccess
 import com.mapsplayground.utils.Event
 import com.mapsplayground.utils.SimpleEvent
 import com.mapsplayground.view.map.usecase.CreateHarborViewsUseCase

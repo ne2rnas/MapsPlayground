@@ -15,6 +15,7 @@ buildscript {
         moshiVersion = "1.11.0"
         roomVersion = '2.3.0-beta03'
         kotPrefVersion = '2.13.1'
+        osmVersion = '6.1.10'
     }
     repositories {
         google()

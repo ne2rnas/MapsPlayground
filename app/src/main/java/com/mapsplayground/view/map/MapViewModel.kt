@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mapsplayground.domain.interactors.GetHarborsUseCase
+import com.mapsplayground.repository.harbor.model.Harbor
 import com.mapsplayground.repository.result.doIfError
 import com.mapsplayground.repository.result.doIfSuccess
+import com.mapsplayground.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -32,11 +34,16 @@ class MapViewModel @Inject constructor(
                 { result ->
                     result.doIfSuccess { harbors ->
                         Log.e("marius", harbors.toString())
+                        _state.value = _state.value!!.copy(
+                            isLoading = false,
+                            harbors = Event(harbors)
+                        )
                     }
                     result.doIfError {
+                        _state.value = _state.value!!.copy(isLoading = false)
                         Log.e("marius", "error", it)
                     }
-                    _state.value = _state.value!!.copy(isLoading = false)
+
                 },
                 {
                     _state.value = _state.value!!.copy(isLoading = false)
@@ -47,7 +54,8 @@ class MapViewModel @Inject constructor(
     }
 
     data class ViewState(
-        val isLoading: Boolean = true
+        val isLoading: Boolean = true,
+        val harbors: Event<List<Harbor>>? = null
     )
 
     override fun onCleared() {

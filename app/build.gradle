@@ -92,4 +92,8 @@ dependencies {
 
     // Shared preferences
     implementation "com.chibatching.kotpref:kotpref:$kotPrefVersion"
+    implementation "androidx.preference:preference-ktx:1.1.1"
+
+    // Osm
+    implementation "org.osmdroid:osmdroid-android:$osmVersion"
 }

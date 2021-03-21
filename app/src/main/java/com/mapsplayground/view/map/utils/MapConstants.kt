@@ -1,4 +1,4 @@
-package com.mapsplayground.view.map
+package com.mapsplayground.view.map.utils
 
 const val MAX_NORTH_COORDINATE = 85.0
 const val MAX_EAST_COORDINATE = 180.0

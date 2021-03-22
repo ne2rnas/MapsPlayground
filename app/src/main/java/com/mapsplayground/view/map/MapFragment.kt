@@ -31,6 +31,8 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
     private val viewModel: MapViewModel by viewModels()
 
+    private var currentHarborViews: List<HarborView> = emptyList()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.initializeMapWithDefaultValues()
@@ -39,17 +41,17 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
     private fun observeLiveData() {
         viewModel.state.observe(
-            viewLifecycleOwner,
-            { viewState ->
-                bindState(viewState)
-            }
+                viewLifecycleOwner,
+                { viewState ->
+                    bindState(viewState)
+                }
         )
     }
 
     private fun bindState(viewState: MapViewModel.ViewState) {
         binding.progressBar.isVisible = viewState.isLoading
-        viewState.harbors.whenNotNullNorEmpty { mapViews ->
-            bindMapView(mapViews)
+        viewState.harborViews.whenNotNullNorEmpty { harborViews ->
+            bindMapView(harborViews)
         }
         viewState.showHarborDialog?.getContentIfNotHandled()?.let { harborInfo ->
             showHarborInfoDialog(harborInfo)
@@ -59,15 +61,19 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         }
     }
 
-    private fun bindMapView(mapViews: List<HarborView>) {
+    private fun bindMapView(harborViews: List<HarborView>) {
+        if (harborViews == currentHarborViews) {
+            return
+        }
         with(binding.mapView) {
-            val markers = mapViews.map { harborView ->
+            val markers = harborViews.map { harborView ->
                 createMarker(harborView) { marker ->
                     viewModel.loadWeather(marker)
                 }
             }
             addMarkers(markers)
             zoomToBoundingBox(markers)
+            currentHarborViews = harborViews
         }
     }
 
@@ -86,26 +92,26 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 }
                 findViewById<TextView>(R.id.harbor_info_temperature).apply {
                     text = String.format(
-                        getString(R.string.temperature),
-                        harborInfo.temp
+                            getString(R.string.temperature),
+                            harborInfo.temp
                     )
                 }
                 findViewById<TextView>(R.id.harbor_info_feels_like).apply {
                     text = String.format(
-                        getString(R.string.temperature),
-                        harborInfo.feelsLike
+                            getString(R.string.temperature),
+                            harborInfo.feelsLike
                     )
                 }
                 findViewById<TextView>(R.id.harbor_info_humidity).apply {
                     text = String.format(
-                        getString(R.string.percentage),
-                        harborInfo.humidity
+                            getString(R.string.percentage),
+                            harborInfo.humidity
                     )
                 }
                 findViewById<TextView>(R.id.harbor_info_pressure).apply {
                     text = String.format(
-                        getString(R.string.pressure),
-                        harborInfo.pressure
+                            getString(R.string.pressure),
+                            harborInfo.pressure
                     )
                 }
             }
@@ -127,7 +133,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
     private fun showError() {
         Snackbar.make(binding.root, resources.getString(R.string.error), Snackbar.LENGTH_LONG)
-            .show()
+                .show()
     }
 
     override fun onResume() {

@@ -69,7 +69,7 @@ class MapViewModelTest {
 
             @Test
             fun `harbors are set`() {
-                assertEquals(harborViews, viewModel.state.value!!.harbors)
+                assertEquals(harborViews, viewModel.state.value!!.harborViews)
             }
         }
 

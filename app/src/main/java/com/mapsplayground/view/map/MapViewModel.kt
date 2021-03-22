@@ -83,7 +83,7 @@ class MapViewModel @Inject constructor(
         is Action.HarborsLoaded -> {
             _state.value = _state.value!!.copy(
                 isLoading = false,
-                harbors = createHarborViewsUseCase(action.harbors)
+                    harborViews = createHarborViewsUseCase(action.harbors)
             )
         }
         is Action.HarborsError -> {
@@ -128,7 +128,7 @@ class MapViewModel @Inject constructor(
 
     data class ViewState(
         val isLoading: Boolean = true,
-        val harbors: List<HarborView> = emptyList(),
+        val harborViews: List<HarborView> = emptyList(),
         val showHarborDialog: Event<HarborInfo>? = null,
         val showError: SimpleEvent? = null
     )
